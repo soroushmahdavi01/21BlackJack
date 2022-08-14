@@ -35,10 +35,11 @@ class usersHand():
         self.__users_total = 0
         self.__user_first_card = userFirstCard
         self.__user_second_card = userSecondCard
-    def set_user_hand(self, score, userFirstCard, userSecondCard):
-        self.__users_total = score
+    def set_user_hand(self, userFirstCard, userSecondCard):
         self.__user_first_card = userFirstCard
         self.__user_second_card = userSecondCard
+    def set_user_score(self, score):
+        self.__users_score = score
     def get_users_total(self):
         return self.__users_total
     def get_user_first_card(self):
@@ -67,14 +68,42 @@ dealerShown = random.choice(deck)
 userFirstCard = random.choice(deck)
 userSecondCard = random.choice(deck)
 
+userHand = []
+userHand += str(userFirstCard)
+userHand += str(userSecondCard)
+
 ############################ FUNCTIONS #####################################
+
+def checkScore(cards):
+    total = 0
+    for i in cards:
+        if i in ["J", "Q", "K"]:
+            total += 10
+        elif i == "A":
+            total += 11
+        elif i == "0":
+            total += 9
+        else:
+            total += int(i)
+        if total > 21:
+            total -= 10
+    return total
+
+
+
+########################
 
 dealer = dealersHand(dealerHidden, dealerShown)
 print(dealer)
 user = usersHand(userFirstCard, userSecondCard)
 print(user)
-dealerHidden = random.choice(deck)
-dealerShown = random.choice(deck)
-dealer = dealersHand(dealerHidden, dealerShown)
-print(dealer)
+print(userHand)
+userScore = checkScore(userHand)
+print(userScore)
+
+
+
+
+
+
 
