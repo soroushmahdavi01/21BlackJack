@@ -1,4 +1,11 @@
 
+################################ IMPORTS ###################################
+
+from operator import contains
+import pygame, sys ,random
+pygame.init()
+pygame.font.init()
+
 #######################################
 
 class dealersHand():
@@ -48,17 +55,6 @@ class usersHand():
         return self.__user_second_card
     def __str__(self):
         return f"You have a {self.__user_first_card} and a {self.__user_second_card}"
-    
-        
-        
-        
-
-################################ IMPORTS ###################################
-import pygame, sys ,random
-pygame.init()
-pygame.font.init()
-gameTrue = pygame.get_init()
-print(gameTrue)
 
 ###############################################################
 
@@ -71,6 +67,10 @@ userSecondCard = random.choice(deck)
 userHand = []
 userHand += str(userFirstCard)
 userHand += str(userSecondCard)
+
+dealerHand = []
+dealerHand += str(dealerHidden)
+dealerHand += str(dealerShown)
 
 ############################ FUNCTIONS #####################################
 
@@ -85,10 +85,27 @@ def checkScore(cards):
             total += 9
         else:
             total += int(i)
-        if total > 21:
-            total -= 10
+    if total > 21:
+        total -= 10
+        # if total > 21:
+        #     total = checkAce(total, cards)
+        #     if total == 0:
+        #         return "Print"
+                
     return total
 
+def getCard(hand):
+    hitCard = random.choice(deck)
+    hand += str(hitCard)
+    if (checkScore(hand) > 21) and hitCard == "A":
+        pass
+    return hand ########## what if i check for 21 bust or ace here???
+
+def checkAce(total, cards):
+    if total > 21:
+        if (i in cards in ["A"]):
+            total -= 9
+    return total
 
 
 ########################
@@ -100,7 +117,10 @@ print(user)
 print(userHand)
 userScore = checkScore(userHand)
 print(userScore)
-
+userHand = getCard(userHand)
+print(userHand)
+userScore = checkScore(userHand)
+print(userScore)
 
 
 
