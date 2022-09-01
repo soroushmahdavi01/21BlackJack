@@ -2,7 +2,7 @@
 ################################ IMPORTS ###################################
 
 from operator import contains
-import pygame, sys ,random
+import pygame, sys, random
 pygame.init()
 pygame.font.init()
 
@@ -98,7 +98,7 @@ def getCard(hand):
     hitCard = random.choice(deck)
     hand += str(hitCard)
     if (checkScore(hand) > 21) and hitCard == "A":
-        pass
+        hand -= 10
     return hand ########## what if i check for 21 bust or ace here???
 
 def checkAce(total, cards):
